@@ -1,0 +1,119 @@
+# Generator of Quasigroup Completion Problem and related problems
+
+"lsencode" is a generator of QWH (Quasigroup with Holes) and QCP
+(Quasigroup Completion Problem). The distribution contains a README
+file, source code in c of the generator, examples (directory PLS),
+and four related papers.
+
+Also see http://www.cs.cornell.edu/gomes/QUASIdemo.html for a demo of solving
+QCP instances.
+
+# General descriptions of lsencode:
+        - Program to generate QWH (Quasigroup with Holes) and QCP (Quasigroup 
+	Complete Problem) instances using different models (e.g., random and 
+	balanced), to perform forward checking, and to convert to SAT.
+
+        Use: for file names (.pls, .ols, or .sol files) only specify the
+                root, do NOT include the extension.
+                For each operation, creates a line in the
+                log file "record" in the current directory.
+
+	File formats used in lsencode:
+                *.pls -- files containing partial Latin squares
+                *.cnf -- files containing the CNF encoding of a 
+                        partial Latin square
+                *.sol -- files containing a solution to the CNF
+                        encoding of a .pls file, in the form of
+                        a list of literals
+                *.ols -- files containing latin squares generated
+                        by the old sgenuls program.
+
+	Compile lsencode by simply typing "make"
+
+# Usage
+
+        lsencode poke {random | balanced | most | least | | banded} INFILE NUMHOLE OUTFILE { SEED }
+                reads INFILE.pls, pokes NUMHOLE holes in it using 
+		specified model (random, balanced, most, least and banded),
+		outputs OUTFILE.pls.
+		Pls see the paper of IJCAI-01 for difference between
+		random and balanced models. 
+
+        lsencode pls2sat INFILE { minimal }
+                reads INFILE.pls, creates INFILE.cnf; if "minimal"
+                included use reduced set of axioms.  Does forward
+                checking during conversion.
+
+        lsencode ols2pls INFILE
+                reads INFILE.ols, converts format to INFILE.pls
+
+        lsencode forward INFILE { OUTFILE }
+                reads INFILE.pls, perform forward checking, 
+                output optionally to OUTFILE.pls.
+                
+                Tracing information includes:
+                csp_vars: number of squares left uncolored after
+                        forward checking.
+                binary_vars: number of Boolean variables in SAT
+                        encoding after forward checking; note that this may range 
+                        from csp_vars to order*csp_vars.
+                fwd_csp_bb: number of squares colored by forward
+                        checking.
+                fwd_bin_bb: number of Boolean variables determined
+                        by forward checking.   The "Forward checking Boolean backbone".
+
+        lsencode sat2pls INFILE { OUTFILE }
+                read INFILE.pls and INFILE.sol, test validity of
+                solution, write solved latin square to OUTFILE.pls
+
+        lsencode new {empty | regular} OUTFILE ORDER
+                create OUTFILE.pls of size ORDER, either as an empty
+                latin square or a solved regular latin square
+
+        lsencode new {qcp | bqcp} OUTFILE ORDER HOLES {SEED}
+                create OUTFILE.pls of size ORDER with HOLES holes using 
+		random (qcp) or balanced (bqcp) models. The created instance
+		can be satisfiable or unsatisfiable
+                                
+        lsencode shuffle INFILE SHUFFLES OUTFILE { SEED }
+                read INFILE.pls, shuffle it SHUFFLES times, and write
+                result to OUTFILE.pls
+                
+
+# Examples
+
+Example of generating a balanced QWH instance of order 30 and 400 holes:
+
+    // create an empty square bqwh-30-empty.pls of order 30:
+    lsencode new empty bqwh-30-empty 30
+
+    // convert it into cnf format:
+    lsencode pls2sat bqwh-30-empty
+
+    // fill the empty square using walksat and save the solution in bqwh-30-empty.sol:
+    walksat  -out bqwh-30-empty.sol < bqwh-30-empty.cnf
+
+    // transform the solution into pls format
+    lsencode sat2pls bqwh-30-empty bqwh-30-walksat
+
+    // shuffle it
+    lsencode shuffle bqwh-30-walksat 10000 bqwh-30-shuffle
+
+    // poke holes in balanced model
+    lsencode poke balanced bqwh-30-shuffle 400 bqwh-30-400
+
+Note that we start with an empty square and use  walksat to fill it into a 
+full square instead of generating a full square directly by lsencode. The
+reason is that the first way give us an random start point for the later shuffling.
+
+# REPORTING BUGS
+
+If you find a bug in the generator, please make sure to tell us about it!
+
+Report bugs and propose modifications and enhancements to
+gomes@cs.cornell.edu (original author) or in the GitHub issues.
+
+# Remarks
+
+I did not develop this project.
+I just put it on GitHub, because it's no longer available on its original home and probably not maintained anymore.

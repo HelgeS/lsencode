@@ -1,0 +1,133 @@
+README 
+
+Source: Carla P. Gomes (gomes@cs.cornell.edu)
+
+List of files: 
+
+
+qwh.order10.holes10.pls      qwh.order40.holes560.pls
+qwh.order10.holes100.pls     qwh.order5.holes10.pls
+qwh.order100.holes10000.pls  qwh.order5.holes25.pls
+qwh.order18.holes120.pls     qwh.order50.holes750.bal.pls
+qwh.order20.holes400.pls     qwh.order50.holes825.bal.pls
+qwh.order30.holes316.pls     qwh.order60.holes1080.bal.pls
+qwh.order30.holes320.pls     qwh.order60.holes1152.bal.pls
+qwh.order30.holes900.pls     qwh.order60.holes1440.pls
+qwh.order33.holes381.pls     qwh.order60.holes1620.pls
+qwh.order35.holes405.pls     qwh.order60.holes3600.pls
+qwh.order40.holes1600.pls    qwh.order70.holes2450.pls
+qwh.order40.holes528.pls     qwh.order70.holes2940.pls
+qwh.order40.holes544.pls     qwh.order70.holes4900.pls
+
+
+These are instances of the Quasigroup With Holes (QWH) problem. 
+
+QWH is the problem of assigning colors to the H holes of a quasigroup
+or latin square of order N. A latin square or quasigroup is a N X N
+matrix on N symbols (or colors) such that no symbols are repeated in
+each row/column of the matrix. 
+
+qwh.orderN.holesH.pls - QWH instance of order N, with H holes. 
+ 	H <= N^2; 
+	When H=N^2 - "empty" QWH -  all the cells of a latin square 
+		     of order N correspond to holes, which corresponds to
+		     generating a quasigroup  of order N from scratch,
+		     without any preassigned colors;
+
+qwh.orderN.holesH.bal.pls - balanced QWH instance -in a balanced
+	instances, the number of holes per row/column is (approximately)
+	constant. 
+
+
+Note that empty QWH instances are easy and in fact one can use a
+cyclic construction to fill in all the holes. However, when using a
+general algorithm (e.g., local search or backtrack search) such
+instances may be difficult due to the size of the encoding (for
+example, that is the case  for Boolean Satisfiability).
+Balanced QWH instances are much harder than  QWH random instances.
+
+
+For more details see:
+
+	 Problem Structure in the Presence of Perturbations, 
+			Carla Gomes and Bart Selman, Proc. AAAI-97, 
+	 Generating Satisfiable Instances, 
+			Achlioptas et al., Proc. AAAI-00, 
+	 Balance and Filtering in Structured Satisfiable Problems, 
+			Kautz et al. Proc. IJCAI01, and 
+	 Completing Quasigroups or Latin Squares: 
+		A Structured Graph Coloring Problem, 
+  			Gomes and Shmoys, Proc. of Computational Symposium
+			on Graph Coloring and Generalizations, 2002
+
+pdf and postscript format available from:
+http://www.cs.cornell.edu/gomes/papers.htm.
+
+
+Level 1:
+
+
+"empty" QWH instances
+
+qwh.order5.holes25.pls
+qwh.order10.holes100.pls    
+qwh.order20.holes400.pls    
+qwh.order30.holes900.pls    
+
+
+qwh.order5.holes10.pls 
+qwh.order10.holes10.pls   
+qwh.order18.holes120.pls  
+qwh.order30.holes316.pls  
+qwh.order30.holes320.pls  
+
+Level 2
+
+
+"empty" instances
+
+qwh.order40.holes1600.pls
+qwh.order60.holes3600.pls
+qwh.order70.holes4900.pls
+qwh.order100.holes10000.pls
+
+qwh.order35.holes405.pls      
+qwh.order40.holes528.pls
+qwh.order40.holes544.pls
+qwh.order40.holes560.pls
+qwh.order60.holes1440.pls
+qwh.order60.holes1620.pls
+qwh.order70.holes2450.pls
+qwh.order70.holes2940.pls
+
+
+Level 3
+
+
+Balanced instances:
+
+qwh.order33.holes381.bal.pls
+
+Level 4
+  
+qwh.order50.holes825.bal.pls
+
+
+Level 5
+
+Not solved by any solver - "Open" (June 1, 2002)
+
+qwh.order50.holes750.bal.pls
+qwh.order60.holes1080.bal.pls
+qwh.order60.holes1152.bal.pls
+
+
+
+
+
+
+
+
+
+
+
